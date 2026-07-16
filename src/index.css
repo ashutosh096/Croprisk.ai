@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-border: var(--border);
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* We'll map the custom tokens to tailwind colors so they are accessible via bg-bg, bg-accent etc. */
+  --color-bg: var(--bg);
+  --color-panel-left: var(--panel-left);
+  --color-card: var(--card);
+  --color-border-soft: var(--border-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-violet: var(--violet);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --color-crit: var(--crit);
+}
+
+:root {
+  --bg: #eaf4fb;
+  --panel-left: #dcedfa;
+  --card: #ffffff;
+  --border: #bfe0f4;
+  --border-soft: #d3e9f7;
+  --ink: #0e2a3d;
+  --ink-soft: #4c6b80;
+  --ink-faint: #7d97a8;
+  --accent: #0f7ea3;
+  --accent-deep: #0a5a78;
+  --violet: #6d5fd9;
+  --good: #2fb37c;
+  --warn: #e0a72c;
+  --bad: #e0592c;
+  --crit: #c62d3e;
+}
+
+.dark {
+  /* No dark mode specific tokens defined in spec, defaulting to same variables to satisfy scaffold */
+  --bg: #eaf4fb;
+  --panel-left: #dcedfa;
+  --card: #ffffff;
+  --border: #bfe0f4;
+  --border-soft: #d3e9f7;
+  --ink: #0e2a3d;
+  --ink-soft: #4c6b80;
+  --ink-faint: #7d97a8;
+  --accent: #0f7ea3;
+  --accent-deep: #0a5a78;
+  --violet: #6d5fd9;
+  --good: #2fb37c;
+  --warn: #e0a72c;
+  --bad: #e0592c;
+  --crit: #c62d3e;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-bg text-ink;
+  }
+}
+
+@layer components {
+  .metric-card {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid color-mix(in srgb, var(--card-accent) 28%, #bfe0f4);
+    border-radius: 14px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(248, 253, 255, 0.88)),
+      radial-gradient(circle at 16% 18%, color-mix(in srgb, var(--card-accent-soft) 72%, transparent), transparent 32%),
+      radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--card-accent) 12%, transparent), transparent 26%);
+    box-shadow:
+      0 1px 2px rgba(14, 42, 61, 0.04),
+      0 12px 28px rgba(15, 126, 163, 0.08);
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .metric-card:hover {
+    border-color: color-mix(in srgb, var(--card-accent) 52%, #bfe0f4);
+    box-shadow:
+      0 4px 10px rgba(14, 42, 61, 0.06),
+      0 18px 36px color-mix(in srgb, var(--card-accent) 16%, transparent);
+  }
+
+  .metric-card__grain {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.46;
+    background-image:
+      linear-gradient(rgba(15, 126, 163, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 126, 163, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.52) 64%, transparent 100%);
+  }
+
+  .metric-card__glow {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    right: -72px;
+    top: -78px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.12;
+    filter: blur(18px);
+    border-radius: 999px;
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .metric-card:hover .metric-card__glow {
+    opacity: 0.2;
+    transform: scale(1.08);
+  }
+
+  .metric-card__sheen {
+    position: absolute;
+    inset: -40% auto -40% 0;
+    z-index: 1;
+    width: 38%;
+    pointer-events: none;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.58), transparent);
+    opacity: 0;
+    transform: skewX(-16deg);
+  }
+
+  .metric-card:hover .metric-card__sheen {
+    opacity: 1;
+  }
+
+  .metric-card__header {
+    border-bottom: 1px solid rgba(191, 224, 244, 0.72);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.42)),
+      linear-gradient(90deg, color-mix(in srgb, var(--card-accent-soft) 42%, transparent), transparent 62%);
+  }
+
+  .metric-card__badge {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.76),
+      0 7px 16px color-mix(in srgb, var(--card-accent) 14%, transparent);
+  }
+
+  .metric-card__select {
+    border: 1px solid color-mix(in srgb, var(--card-accent) 24%, #bfe0f4);
+    border-radius: 999px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.68), rgba(232, 246, 253, 0.9)),
+      color-mix(in srgb, var(--card-accent-soft) 34%, #f0f8fc);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  }
+
+  .metric-card__select:hover {
+    border-color: color-mix(in srgb, var(--card-accent) 42%, #bfe0f4);
+  }
+
+  .metric-card__menu {
+    border: 1px solid #0f7ea3;
+    border-radius: 0 0 10px 10px;
+    background: rgba(248, 252, 255, 0.98);
+    box-shadow:
+      0 10px 20px rgba(14, 42, 61, 0.14),
+      0 1px 0 rgba(255, 255, 255, 0.74) inset;
+    backdrop-filter: blur(10px);
+  }
+
+  .metric-card__option {
+    display: block;
+    width: 100%;
+    min-height: 24px;
+    padding: 4px 11px;
+    color: #075577;
+    text-align: left;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.25;
+    transition: background 120ms ease, color 120ms ease, padding-left 120ms ease;
+  }
+
+  .metric-card__option:hover {
+    background: rgba(224, 244, 247, 0.92);
+    color: #075577;
+    padding-left: 13px;
+  }
+
+  .metric-card__option.is-selected {
+    color: #ffffff;
+    background: #0f8aa6;
+  }
+
+  .metric-card__body {
+    background:
+      radial-gradient(circle at 9% 42%, color-mix(in srgb, var(--card-accent-soft) 42%, transparent), transparent 28%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(245, 251, 254, 0.26));
+  }
+
+  .metric-card__footer {
+    border-top: 1px solid rgba(191, 224, 244, 0.82);
+    background:
+      linear-gradient(180deg, rgba(247, 252, 255, 0.64), rgba(239, 248, 253, 0.92)),
+      linear-gradient(90deg, transparent, color-mix(in srgb, var(--card-accent-soft) 40%, transparent), transparent);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes borderPulse {
+  0%, 100% { 
+    border-color: rgba(255, 255, 255, 0.2); 
+    box-shadow: 0 10px 40px -10px rgba(15, 126, 163, 0.3), 0 0 20px rgba(15, 126, 163, 0.1); 
+  }
+  50% { 
+    border-color: rgba(255, 255, 255, 0.5); 
+    box-shadow: 0 10px 40px -5px rgba(47, 179, 124, 0.5), 0 0 30px rgba(47, 179, 124, 0.25); 
+  }
+}
+
+.animated-login-card {
+  background: linear-gradient(-45deg, rgba(11, 90, 120, 0.88), rgba(15, 126, 163, 0.88), rgba(28, 120, 85, 0.88), rgba(64, 49, 153, 0.88));
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite, borderPulse 5s ease-in-out infinite;
+  backdrop-filter: blur(16px);
+}
+
