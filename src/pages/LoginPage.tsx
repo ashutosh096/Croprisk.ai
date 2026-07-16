@@ -21,7 +21,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden">
-      {/* Login background image - kept soft blurred to match mockup */}
+      {/* Login background image - blur reduced to make text visible */}
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
@@ -31,14 +31,28 @@ export default function LoginPage() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           opacity: 1,
-          filter: "blur(5px) brightness(0.95)",
-          transform: "scale(1.05)",
+          filter: "blur(1px) brightness(0.95)",
+          transform: "scale(1.02)",
         }}
       />
 
+      {/* Climagro Analytics Logo in top-left corner */}
       <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+        className="absolute top-6 left-6 z-10"
+      >
+        <img 
+          src="/climagro-logo.png" 
+          alt="Climagro Analytics Logo" 
+          className="w-24 h-24 md:w-32 md:h-32 object-contain"
+        />
+      </motion.div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 90 }}
+        animate={{ opacity: 1, y: 60 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full max-w-[440px] mx-4 z-10"
       >

@@ -11,44 +11,42 @@ export default function DashboardPage() {
 
       {/* ── Top header bar ── */}
       <header
-        className="flex items-center gap-3 px-5 py-2.5 flex-shrink-0"
+        className="flex items-center justify-between px-5 py-1 flex-shrink-0"
         style={{
           background: "#ffffff",
           borderBottom: "1px solid #cde3f2",
           boxShadow: "0 1px 4px rgba(15,126,163,0.07)",
         }}
       >
-        <div
-          className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-          style={{ background: "#0e7ea4" }}
-        >
-          <div className="w-3 h-3 rounded-full border-2 border-white opacity-90" />
-        </div>
-        <div className="flex items-baseline gap-2">
+        {/* Left Side: Logo and Title */}
+        <div className="flex items-center gap-3 w-1/3 min-w-[320px] flex-shrink-0">
+          <img 
+            src="/climagro-logo.png" 
+            alt="Climagro Analytics" 
+            className="w-10 h-10 object-contain flex-shrink-0"
+          />
           <span
             className="text-[17px] font-bold leading-none"
             style={{ fontFamily: "Space Grotesk, sans-serif", color: "#0e3d52" }}
           >
-            CropRisk.ai
-          </span>
-          <span className="text-[12px] font-medium" style={{ color: "#6fa8c0" }}>
-            Dashboard
+            CropRisk.ai <span className="font-extrabold text-[#036468] ml-1">Powered by Climagro Analytics</span>
           </span>
         </div>
-        <div className="flex-1" />
 
-        {/* Heading capsule — shown once dashboard is loaded */}
-        {isLoaded && loadedQuery
-          ? <HeadingCapsule />
-          : (
-            <span
-              className="text-[10px] px-2 py-1 rounded-full font-medium"
-              style={{ background: "#dff0f9", color: "#0e7ea4" }}
-            >
-              Agriculture Risk Intelligence
-            </span>
-          )
-        }
+        {/* Middle: Heading Capsule (centered) */}
+        <div className="flex justify-center flex-1 min-w-[200px]">
+          {isLoaded && loadedQuery && <HeadingCapsule />}
+        </div>
+
+        {/* Right Side: Agriculture Risk Intelligence */}
+        <div className="flex justify-end w-1/3 min-w-[220px] flex-shrink-0">
+          <span
+            className="text-[10px] px-2.5 py-1 rounded-full font-medium tracking-wide uppercase"
+            style={{ background: "#dff0f9", color: "#0e7ea4" }}
+          >
+            Agriculture Risk Intelligence
+          </span>
+        </div>
       </header>
 
       {/* ── Panels row — flex-1 + min-h-0 fills remaining height exactly ── */}
