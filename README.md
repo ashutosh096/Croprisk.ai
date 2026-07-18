@@ -20,6 +20,30 @@
 
 ---
 
+## 📸 Portal & Dashboard Showcase
+
+### 🔒 Secure Enterprise Portal
+An elegant, animated glassmorphism login portal featuring smooth gradient meshes and pulsing glow outlines.
+
+![Secure Enterprise Portal](screenshots/login_portal.png)
+
+### 🌾 CropRisk.ai Dashboard (Initial State)
+The starting workspace environment prompting users to select location, crop type, and time period from the filters panel to load analytics.
+
+![Dashboard Initial State](screenshots/dashboard_initial.png)
+
+### 📊 Agriculture Risk Intelligence (Overview)
+A premium dashboard offering deep analytics, including Total Crop Area, Crop Rotation Index, Average Yield, Risk Profiles, and Climate Hazard & Stress metrics.
+
+![Dashboard Overview](screenshots/dashboard_overview.png)
+
+### 📈 Analytical Gauges & Metrics
+Detailed visualization of historical averages, threshold limits, anomalies, and 7-day changes for water availability, crop health, and stability index.
+
+![Dashboard Gauges and Indices](screenshots/dashboard_indices.png)
+
+---
+
 ## 🛠️ Technology Stack
 
 - **Framework:** [React 19](https://react.dev/)
